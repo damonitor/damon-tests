@@ -3,6 +3,13 @@
 
 damon_dir="/sys/kernel/debug/damon"
 
+ksft_skip=4
+
+if [ ! -d "$damon_dir" ]
+then
+	exit $ksft_skip
+fi
+
 echo ctx > "$damon_dir/mk_contexts"
 if [ ! -d "$damon_dir/ctx" ]
 then

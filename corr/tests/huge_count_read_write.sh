@@ -3,6 +3,13 @@
 
 set -e
 
+ksft_skip=4
+
+if [ ! -d /sys/kernel/debug/damon ]
+then
+	exit $ksft_skip
+fi
+
 dmesg -C
 
 for file in /sys/kernel/debug/damon/*
