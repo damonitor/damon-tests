@@ -10,7 +10,8 @@ First, setup your test machines.  The machines should be able to be accessed
 via `ssh` from your host machine (the machine that runs humble_ci) without any
 password prompt.  For that, you could set the `~/.ssh/authorized_keys` file of
 the test machine.  The test account should also be able to run `sudo` without
-prompts (this can be done by editing the sudoer file).
+prompts (this can be done by editing the sudoer file).  The test machine should
+also have `rsync` installed.
 
 Second, write down your own `config.sh` file for your test machines setup.
 Specifically, the file should define `test_machines`, `test_users`,
