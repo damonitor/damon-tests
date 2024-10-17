@@ -3,6 +3,19 @@
 
 # Test arm64 build failure problem reported by kbuild robot
 
+ksft_skip=4
+
+# lftp is used inside lkp-tests for downloading cross compilers.  It fails[1]
+# when the system is not having global ipv6, though it isn't needed for http.
+# Just skip the test on the system failing it.
+#
+# [1] https://github.com/lavv17/lftp/blob/fdb81537a2f854/src/Resolver.cc#L362
+if ! lftp -c "open https://cdn.kernel.org/pub/tools/crosstool/files/bin/x86_64/"
+then
+	echo "lftp fail"
+	exit $ksft_skip
+fi
+
 LINUX_SRC='../../../../'
 TESTDIR=$PWD
 ODIR=$TESTDIR/`basename $0`.out
