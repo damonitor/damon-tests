@@ -29,12 +29,18 @@ ssh -p "$ssh_port" "$test_user@$test_machine" mkdir -p "$remote_work_dir" \
 rsync -e "ssh -p $ssh_port" "$bindir/$local_setup_sh" \
 	"$test_user@$test_machine:$remote_work_dir/" 2>&1 | \
 	tee --append "$log_file"
+# local_setup_sh may need internet connection, and http_proxy may setup by
+# /etc/profile.d, which is executed for only login shell, so use 'bash --login
+# -c'.
 # ssh receives single string that quote-escaped.
+# bash -c also receives single string that quote-escaped.
+# hence double-escape quots in local command.
 if ! ssh -p "$ssh_port" -o ServerAliveInterval=60 "$test_user@$test_machine" \
-	nohup "\"$remote_work_dir/$local_setup_sh\" \"$remote_work_dir\" \
-	\"$damon_tests_version\" \"$damo_version\" \
-	\"$linux_commit\" \"$linux_remote_name\" \
-	\"$linux_remote_url\""" 2>&1 | \
+	nohup "bash --login -c \" \
+	\\\"$remote_work_dir/$local_setup_sh\\\" \\\"$remote_work_dir\\\" \
+	\\\"$damon_tests_version\\\" \\\"$damo_version\\\" \
+	\\\"$linux_commit\\\" \\\"$linux_remote_name\\\" \
+	\\\"$linux_remote_url\\\"\"" 2>&1 | \
 	tee --append "$log_file"
 then
 	echo "$local_setup_sh failed" | tee --append "$log_file"

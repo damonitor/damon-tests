@@ -21,8 +21,9 @@ for i in {1..5};
 do
 	ssh "$test_user@$test_machine" -p "$ssh_port" \
 		-o ServerAliveInterval=60 \ nohup \
-		"sudo timeout \"$timeout_interval\" \
-			\"$work_dir/damon-tests/corr/run.sh\"" 2>&1 | \
+		"bash --login -c \
+		\"sudo timeout \\\"$timeout_interval\\\" \
+			\\\"$work_dir/damon-tests/corr/run.sh\\\"\"" 2>&1 | \
 				tee --append "$log_file"
 	exit_code=$?
 	if [ "$exit_code" -eq 0 ]
