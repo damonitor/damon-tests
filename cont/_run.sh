@@ -39,7 +39,7 @@ fi
 		linux-6.6.y \
 	--tree_to_track stable \
 		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
-		linux-6.10.y \
+		linux-6.11.y \
 	--tree_to_track stable-rc \
 		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git \
 		linux-5.15.y \
@@ -51,7 +51,7 @@ fi
 		linux-6.6.y \
 	--tree_to_track stable-rc \
 		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git \
-		linux-6.10.y \
+		linux-6.11.y \
 	--tree_to_track linus \
 		https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git \
 		master \
