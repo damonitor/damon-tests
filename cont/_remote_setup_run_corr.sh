@@ -44,7 +44,7 @@ do
 	logfile=remote_setup_"$i"_${test_machines[$i]}
 	"$bindir/_remote_setup.sh" "${test_users[$i]}" "${test_machines[$i]}" \
 		"${test_ssh_ports[$i]}" "$logs_dir/$logfile" \
-		"$remote_work_dir" "downstream/next" "downstream/next" \
+		"$remote_work_dir" "upstream/next" "upstream/next" \
 		"$linux_commit" "$linux_remote" "$linux_url" &
 	# limit number of parallel setups to 5, to not stress remote repos
 	if [ $i -ne 0 ] && [ $((i % 5)) -eq 0 ]
