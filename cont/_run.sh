@@ -37,37 +37,37 @@ fi
 	--tree_to_track al https://github.com/amazonlinux/linux \
 		amazon-6.1.y/mainline \
 	--tree_to_track stable \
-		git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
+		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
 		linux-5.15.y \
 	--tree_to_track stable \
-		git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
+		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
 		linux-6.1.y \
 	--tree_to_track stable \
-		git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
+		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
 		linux-6.6.y \
 	--tree_to_track stable \
-		git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
+		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git \
 		linux-6.10.y \
 	--tree_to_track stable-rc \
-		git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git \
+		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git \
 		linux-5.15.y \
 	--tree_to_track stable-rc \
-		git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git \
+		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git \
 		linux-6.1.y \
 	--tree_to_track stable-rc \
-		git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git \
+		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git \
 		linux-6.6.y \
 	--tree_to_track stable-rc \
-		git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git \
+		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git \
 		linux-6.10.y \
 	--tree_to_track linus \
-		git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git \
+		https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git \
 		master \
 	--tree_to_track akpm.korg.mm \
-		git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm mm-stable \
+		https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm mm-stable \
 	--tree_to_track akpm.korg.mm \
-		git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm mm-unstable \
+		https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm mm-unstable \
 	--tree_to_track sj.korg \
-		git://git.kernel.org/pub/scm/linux/kernel/git/sj/linux damon/next \
+		https://git.kernel.org/pub/scm/linux/kernel/git/sj/linux damon/next \
 	--cmds "$bindir/_for_tree_updates.sh" \
 	--delay 3600 $uncond_single_run
