@@ -41,10 +41,18 @@ rm -fr "$ksft_abs_path/damo"
 cp -R "$damo_dir" "$ksft_abs_path/"
 
 masim_dir="$repos_dir/masim"
+if [ ! -d "$masim_dir" ]
+then
+	echo "$masim_dir not found"
+	exit 1
+fi
 if [ ! -x "$masim_dir/masim" ]
 then
-	echo "masim at $masim_dir/masim not found"
-	exit 1
+	if ! make -C "$masim_dir"
+	then
+		echo "building masim failed"
+		exit 1
+	fi
 fi
 cp -R "$masim_dir" "$ksft_abs_path/"
 
