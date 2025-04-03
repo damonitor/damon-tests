@@ -65,6 +65,8 @@ fi
 		https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm mm-stable \
 	--tree_to_track akpm.korg.mm \
 		https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm mm-unstable \
+	--tree_to_track akpm.korg.mm \
+		https://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm mm-new \
 	--tree_to_track sj.korg \
 		https://git.kernel.org/pub/scm/linux/kernel/git/sj/linux damon/next \
 	--cmds "$bindir/_for_tree_updates.sh" \
