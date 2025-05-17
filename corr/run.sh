@@ -56,6 +56,14 @@ then
 fi
 cp -R "$masim_dir" "$ksft_abs_path/"
 
+damon_stat_enabled_file="/sys/module/damon_stat/parameters/enabled"
+if [ $(cat "$damon_stat_enabled_file") = "Y" ]
+then
+	echo "DAMON_STAT is running.  Disable for testing."
+	echo N > "$damon_stat_enabled_file"
+	restart_damon_stat="true"
+fi
+
 # run
 (
 	cd $LINUX_DIR
@@ -66,6 +74,12 @@ cp -R "$masim_dir" "$ksft_abs_path/"
 	echo "# kselftest dir '$ksft_abs_path' is in dirty state."
 	echo "# the log is at '$LOG'."
 )
+
+if [ "$restart_damon_stat" = "true" ]
+then
+	echo "DAMON_STAT was running before test.  Re-enable it."
+	echo Y > "$damon_stat_enabled_file"
+fi
 
 # print results
 if ! $BINDIR/_summary_results.sh $LOG
