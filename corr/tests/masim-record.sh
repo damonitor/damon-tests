@@ -25,6 +25,21 @@ then
 	exit "$ksft_skip"
 fi
 
+damon_interfaces=""
+if [ -d "/sys/kernel/debug/damon" ]
+then
+        damon_interfaces+="debugfs "
+fi
+if [ -d "/sys/kernel/mm/damon" ]
+then
+        damon_interfaces+="sysfs "
+fi
+if [ "$damon_interfaces" = "" ]
+then
+	echo "SKIP $(basename $(pwd)) (DAMON interface not found)"
+	exit 0
+fi
+
 thp_file="/sys/kernel/mm/transparent_hugepage/enabled"
 if [ -f "$thp_file" ]
 then
