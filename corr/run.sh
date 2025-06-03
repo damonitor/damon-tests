@@ -57,7 +57,7 @@ fi
 cp -R "$masim_dir" "$ksft_abs_path/"
 
 damon_stat_enabled_file="/sys/module/damon_stat/parameters/enabled"
-if [ $(cat "$damon_stat_enabled_file") = "Y" ]
+if [[ $(cat "$damon_stat_enabled_file") = "Y" ]]
 then
 	echo "DAMON_STAT is running.  Disable for testing."
 	echo N > "$damon_stat_enabled_file"
