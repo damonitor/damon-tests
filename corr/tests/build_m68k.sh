@@ -45,8 +45,8 @@ echo 'CONFIG_MODULES=y' >> $ODIR/.config
 cat "$TESTDIR/damon_config" >> "$ODIR/.config"
 
 export COMPILER_INSTALL_PATH=$HOME/0day
-export COMPILER=gcc-7.5.0
-export URL=https://cdn.kernel.org/pub/tools/crosstool/files/bin/x86_64/7.5.0
+export COMPILER=gcc-8.1.0
+export URL=https://cdn.kernel.org/pub/tools/crosstool/files/bin/x86_64/8.1.0
 
 make.cross O=$ODIR ARCH=m68k olddefconfig
 make.cross O=$ODIR ARCH=m68k -j`grep -e '^processor' /proc/cpuinfo | wc -l`
