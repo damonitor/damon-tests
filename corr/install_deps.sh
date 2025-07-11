@@ -22,6 +22,11 @@ elif which dnf &> /dev/null; then
 	sudo dnf install -y make gcc gcc-c++ flex bison lftp gmp-devel \
 	libmpc-devel
 
+# SUSE-based distros
+elif which zypper &> /dev/null; then
+	sudo zypper install -y make gcc gcc-c++ flex bison bc lftp gmp-devel \
+	mpc-devel
+
 else
 	echo '#################################################################'
 	echo '# This distribution is not officially maintained by damon_tests #'
