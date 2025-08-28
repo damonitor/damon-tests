@@ -21,5 +21,6 @@ TEST_PROGS += build_m68k.sh
 TEST_PROGS += build_i386_idle_flag.sh
 TEST_PROGS += build_i386_highpte.sh
 TEST_PROGS += build_nomemcg.sh
+TEST_PROGS += build_i386_phys_addr_t_64bit.sh
 
 include ../lib.mk
