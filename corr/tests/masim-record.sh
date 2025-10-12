@@ -43,7 +43,10 @@ fi
 thp_file="/sys/kernel/mm/transparent_hugepage/enabled"
 if [ -f "$thp_file" ]
 then
-	thps="always madvise"
+	# on some machines, enabling thp makes error rate so big.  test only
+	# madvise case for now.  todo: revisit for thp case error rate setup.
+	# thps="always madvise"
+	thps="madvise"
 else
 	thps=""
 fi
