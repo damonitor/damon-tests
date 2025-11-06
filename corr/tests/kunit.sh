@@ -10,6 +10,12 @@ then
 	exit "$ksft_skip"
 fi
 
+if [ "$(uname -m)" = "aarch64" ]
+then
+	echo "aarch64 does not support um linux"
+	exit "$ksft_skip"
+fi
+
 TEST_DIR=$PWD
 KUNIT_BDIR=$TEST_DIR/kunit.out
 
