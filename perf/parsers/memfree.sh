@@ -3,7 +3,7 @@
 
 LBX="$(dirname "$0")/../../../lazybox"
 
-$LBX/scripts/report/memfree_to_used.py $1/memfree > $2/memused
+$LBX/format_data/memfree_to_used.py $1/memfree > $2/memused
 
 MFTOT=0
 NR_MF=0

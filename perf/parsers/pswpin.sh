@@ -4,7 +4,7 @@
 LBX="$(dirname "$0")/../../../lazybox"
 PSWPIN=$1/pswpin
 
-$LBX/scripts/report/recs_to_diff.py $PSWPIN > $2/pswpin.diff
+$LBX/format_data/recs_to_diff.py $PSWPIN > $2/pswpin.diff
 NR_SWPIN=0
 TOTAL_SWPIN=0
 for swpin in `awk '{print $2}' $2/pswpin.diff`

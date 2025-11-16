@@ -6,7 +6,7 @@ outfile="nr_used_pages"
 in_dir=$1
 out_dir=$2
 
-"$LBX/scripts/report/memfree_to_used.py" "$in_dir/nr_free_pages" \
+"$LBX/format_data/memfree_to_used.py" "$in_dir/nr_free_pages" \
 	> "$out_dir/$outfile"
 
 sum=0
