@@ -60,9 +60,9 @@ if [ "$var" = "orig" ] || [ "$var" = "thp" ] || [ "$var" = "ttmo" ]
 then
 	if [ "$var" = "thp" ]
 	then
-		sudo $LBX/scripts/turn_thp.sh always
+		sudo $LBX/tune/turn_thp.sh always
 	else
-		sudo $LBX/scripts/turn_thp.sh madvise
+		sudo $LBX/tune/turn_thp.sh madvise
 	fi
 
 	eval $RUN_CMD
@@ -70,7 +70,7 @@ then
 fi
 
 # var is neither 'orig' nor 'thp'
-sudo $LBX/scripts/turn_thp.sh madvise
+sudo $LBX/tune/turn_thp.sh madvise
 eval $RUN_CMD &
 
 cmdname=$work
