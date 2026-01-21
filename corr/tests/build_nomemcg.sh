@@ -5,17 +5,18 @@
 #
 # [1] https://lore.kernel.org/linux-mm/202002051834.cKoViGVl%25lkp@intel.com/
 
-LINUX_SRC='../../../../'
-TESTDIR=$PWD
-ODIR=$PWD/`basename $0`.out
+bindir=$(realpath "$(dirname "%0")")
 
-mkdir -p $ODIR
+out_dir="${bindir}/$(basename $0).out"
+mkdir -p "$out_dir"
 
-cd $LINUX_SRC
-make O=$ODIR allnoconfig
-cat "$TESTDIR/damon_config" >> "$ODIR/.config"
-echo "CONFIG_CGROUPS=y" >> "$ODIR/.config"
+linux_root=$(realpath "$bindir/../../../../")
+cd "$linux_root"
 
-make O=$ODIR olddefconfig
-make O=$ODIR -j$(nproc)
+make "O=${out_dir}" allnoconfig
+cat "${bindir}/damon_config" >> "${out_dir}/.config"
+echo "CONFIG_CGROUPS=y" >> "${out_dir}/.config"
+
+make "O=${out_dir}" olddefconfig
+make "O=${out_dir}" -j$(nproc)
 exit $?
