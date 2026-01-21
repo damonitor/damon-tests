@@ -18,36 +18,36 @@ then
 	exit $ksft_skip
 fi
 
-LINUX_SRC='../../../../'
-TESTDIR=$PWD
-ODIR=$TESTDIR/`basename $0`.out
+bindir=$(realpath "$(dirname "$0")")
 
-mkdir -p bin
-PATH=$TESTDIR/bin/:$PATH
+mkdir -p "${bindir}/bin"
+PATH=${bindir}/bin/:$PATH
+PATH=${bindir}/bin/lkp-tests/kbuild/:$PATH
 
-PATH=$TESTDIR/bin/lkp-tests/kbuild/:$PATH
-
-if [ ! -x ./bin/lkp-tests/kbuild/make.cross ]
+if [ ! -x "${bindir}/bin/lkp-tests/kbuild/make.cross" ]
 then
-	git clone https://github.com/intel/lkp-tests ./bin/lkp-tests
+	git clone https://github.com/intel/lkp-tests "${bindir}/bin/lkp-tests"
 	# By default make.cross compiles kernel with strict compiler flags on
 	# top. To disable them and make a regular kernel build, edit or erase
 	# extra flags in kbuld-kcflags file:
 	# echo "" > ./bin/lkp-tests/kbuild/etc/kbuild-kcflags
-	chmod +x ./bin/lkp-tests/kbuild/make.cross
+	chmod +x "${bindir}/bin/lkp-tests/kbuild/make.cross"
 fi
 
-mkdir -p $ODIR
+out_dir=${bindir}/$(basename "$0").out
+mkdir -p $out_dir
 
-cd $LINUX_SRC
-make O=$ODIR ARCH=m68k allnoconfig
-echo 'CONFIG_MODULES=y' >> $ODIR/.config
-cat "$TESTDIR/damon_config" >> "$ODIR/.config"
+# bindir is supposed to be tools/testing/selftets/damon-tests/ of linux tree
+linux_root=$(realpath "${bindir}/../../../../")
+cd $linux_root
+make "O=${out_dir}" ARCH=m68k allnoconfig
+echo 'CONFIG_MODULES=y' >> "${out_dir}/.config"
+cat "${bindir}/damon_config" >> "$out_dir/.config"
 
 export COMPILER_INSTALL_PATH=$HOME/0day
 export COMPILER=gcc-8.1.0
 export URL=https://cdn.kernel.org/pub/tools/crosstool/files/bin/x86_64/8.1.0
 
-make.cross O=$ODIR ARCH=m68k olddefconfig
-make.cross O=$ODIR ARCH=m68k -j`grep -e '^processor' /proc/cpuinfo | wc -l`
+make.cross "O=${out_dir}" ARCH=m68k olddefconfig
+make.cross "O=${out_dir}" ARCH=m68k "-j$(nproc)"
 exit $?
