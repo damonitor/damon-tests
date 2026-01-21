@@ -1,9 +1,9 @@
 #!/bin/bash
 # SPDX-License-Identifier: GPL-2.0
 
-# Test i386 build failure problem reported[1] by kbuild robot
+# Test i386 build failure problem reported[1] by Randy.
 #
-# [1] https://lore.kernel.org/linux-mm/202002051834.cKoViGVl%25lkp@intel.com/
+# [1] https://lore.kernel.org/mm-commits/2232228f-573b-ac19-1cb0-88690fdf6177@infradead.org/
 
 LINUX_SRC='../../../../'
 TESTDIR=$PWD
