@@ -13,6 +13,7 @@ mkdir -p $ODIR
 
 cd $LINUX_SRC
 make O=$ODIR ARCH=i386 allnoconfig
+echo 'CONFIG_HIGHPTE=y' >> "$ODIR/.config"
 cat "$TESTDIR/damon_config" >> "$ODIR/.config"
 
 make O=$ODIR ARCH=i386 olddefconfig
