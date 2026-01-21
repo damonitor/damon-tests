@@ -5,16 +5,17 @@
 #
 # [1] https://lore.kernel.org/linux-mm/202002051834.cKoViGVl%25lkp@intel.com/
 
-LINUX_SRC='../../../../'
-TESTDIR=$PWD
-ODIR=$PWD/`basename $0`.out
+bindir=$(realpath "$(dirname "$0")")
 
-mkdir -p $ODIR
+out_dir=${bindir}/$(basename $0).out
+mkdir -p $out_dir
 
-cd $LINUX_SRC
-make O=$ODIR ARCH=i386 allnoconfig
-cat "$TESTDIR/damon_config" >> "$ODIR/.config"
+linux_root=$(realpath "${bindir}/../../../../")
+cd $linux_root
+make "O=${out_dir}" ARCH=i386 allnoconfig
+cat "${bindir}/damon_config" >> "${out_dir}/.config"
 echo 'CONFIG_PAGE_IDLE_FLAG=y' >> $ODIR/.config
-make O=$ODIR ARCH=i386 olddefconfig
-make O=$ODIR ARCH=i386 -j`grep -e '^processor' /proc/cpuinfo | wc -l`
+
+make "O=${out_dir}" ARCH=i386 olddefconfig
+make "O=${out_dir}" ARCH=i386 -j$(nproc)
 exit $?
