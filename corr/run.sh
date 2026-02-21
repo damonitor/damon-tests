@@ -6,6 +6,9 @@ echo "Run damon-tests/corr on $(uname -r) kernel"
 BINDIR=`dirname $0`
 LOG=$PWD/log
 
+# ensure no pass under warning
+echo 1 > /proc/sys/kernel/panic_on_warn
+
 repos_dir=$(realpath "$BINDIR/../../")
 
 if [ -z $LINUX_DIR ]
