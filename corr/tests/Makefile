@@ -18,6 +18,7 @@ TEST_PROGS += masim-record.sh
 # build tests
 TEST_PROGS += build_i386.sh build_arm64.sh
 TEST_PROGS += build_m68k.sh
+TEST_PROGS += build_m68k_w1.sh
 TEST_PROGS += build_i386_idle_flag.sh
 TEST_PROGS += build_i386_highpte.sh
 TEST_PROGS += build_nomemcg.sh
