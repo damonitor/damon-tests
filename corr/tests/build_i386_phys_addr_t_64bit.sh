@@ -14,7 +14,7 @@ linux_root=$(realpath "${bindir}/../../../../")
 cd $linux_root
 make "O=${out_dir}" ARCH=i386 allnoconfig
 cat "${bindir}/damon_config" >> "${out_dir}/.config"
-echo 'CONFIG_X86_PAE=y' >> "$ODIR/.config"
+echo 'CONFIG_X86_PAE=y' >> "${out_dir}/.config"
 
 make "O=${out_dir}" ARCH=i386 olddefconfig
 make "O=${out_dir}" ARCH=i386 -j$(nproc)
