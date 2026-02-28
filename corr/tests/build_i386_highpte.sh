@@ -13,7 +13,7 @@ mkdir -p $out_dir
 linux_root=$(realpath "${bindir}/../../../../")
 cd $linux_root
 make "O=${out_dir}" ARCH=i386 allnoconfig
-echo 'CONFIG_HIGHPTE=y' >> "$ODIR/.config"
+echo 'CONFIG_HIGHPTE=y' >> "${out_dir}/.config"
 cat "${bindir}/damon_config" >> "${out_dir}/.config"
 
 make "O=${out_dir}" ARCH=i386 olddefconfig
