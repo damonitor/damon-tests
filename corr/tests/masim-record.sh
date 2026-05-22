@@ -4,6 +4,8 @@
 ksft_skip=4
 
 TEST_DIR=$PWD
+# Stop any stale DAMON from previous tests
+sudo ./damo/damo stop 2>/dev/null
 
 if [ $EUID -ne 0 ]
 then
