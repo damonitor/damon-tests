@@ -7,6 +7,7 @@ BINDIR=`dirname $0`
 LOG=$PWD/log
 
 # ensure no pass under warning
+echo 1 > /sys/kernel/debug/clear_warn_once
 echo 1 > /proc/sys/kernel/panic_on_warn
 
 repos_dir=$(realpath "$BINDIR/../../")
