@@ -42,9 +42,6 @@ fi
 		linux-6.12.y \
 	--tree_to_track stable-rc \
 		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git \
-		linux-6.15.y \
-	--tree_to_track stable-rc \
-		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git \
 		linux-6.18.y \
 	--tree_to_track stable-rc \
 		https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable-rc.git \
