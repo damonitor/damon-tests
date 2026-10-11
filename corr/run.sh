@@ -68,6 +68,9 @@ then
 	restart_damon_stat="true"
 fi
 
+# disable thp always, as some tests fail by the lack of tlb flushes
+echo madivse | tee /sys/kernel/mm/transparent_hugepage/enabled
+
 # run
 (
 	cd $LINUX_DIR
