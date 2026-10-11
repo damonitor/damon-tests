@@ -3,30 +3,45 @@ This directory contains files for the continuous test of DAMON.
 It checks updates to several kernel trees, trigger tests on remote test
 machines, and retrieve the test results from them.
 
-Usage
-=====
+Setup: Machines
+===============
 
-First, setup your test machines.  The machines should be able to be accessed
-via `ssh` from your host machine (the machine that runs humble_ci) without any
-password prompt.  For that, you could set the `~/.ssh/authorized_keys` file of
-the test machine.  The test account should also be able to run `sudo` without
-prompts (this can be done by editing the sudoer file).  The test machine should
-also have `rsync` and `drgn` installed.
+You need to prepare two machines: 'triger' and 'runner'.  'Trigger' machine
+monitors updates to the test target kernel trees and request 'runner' machine
+to fetch the source code, build, reboot, and run DAMON tests in it.
 
-Second, write down your own `config.sh` file for your test machines setup.
-Specifically, the file should define `test_machines`, `test_users`,
-`test_ssh_ports` variables as arrays.  Optionally, if your machine is
-configured to send mail via `git send-email` without prompts, you may set
-`result_noti_recipients` variable.  For an example:
+'Trigger' machine should be able to `ssh` into 'runner' machine without any
+password prompt.  Setting `~/.ssh/authorized_keys` in the 'runner' machine
+would be a way for this.  'Trigger' machine should also be able to run `sudo`
+without prompts.  Setting `sudoer` file via `visudo` would be a way to do that.
+
+'Runner' machine should also have `rsync` and `drgn` instlled.
+
+Setup: CI config
+================
+
+Write down `config.sh` file in your test setup directory.  The file should
+define `test_machines`, `test_users`, `test_ssh_ports` variables as arrays.
+
+Optionally, if the 'triger' machine is configured to be able to send mail via
+`git send-email` without prompts, it can send test results via mail if the
+`config.sh` file has `result_noti_recipients` set.
 
     test_machines=(test_machine1_x86 test_machine2_arm64)
     test_users=(alice alice)
     test_ssh_ports=(22 2222)
     result_noti_recipients="alice@wonder.land"
 
-Third, execute `run.sh` file.  It will check update to upstream trees having
-DAMON code, including LTS, stable, mainline, and -mm tree every hour.  Then, if
-any update to any of the tree is found, the script will install the updated
-kernel on your test machines, reboot, and run the `damon-tests/corr` tests.
-Summarized results will be sent to you as email if you set
-`result_noti_recipients` variable in the `config.sh` file.
+The target trees to test are set in `_run.sh` file.  It is currently testing
+test LTS, stable, mainline, mm-stable, mm-unstable, mm-new and damon/next
+trees.  Modify the file if need to test different target trees.
+
+Test Run
+========
+
+Execute `run.sh` file.  It will check updates to the test target trees every
+hour.  Then, if any update to any of the tree is found, the script will install
+the updated kernel on the 'runner' machines, reboot it, and run the
+`damon-tests/corr` tests on it.  Test results are available under `logs`
+directory.  Summarized results will be sent to `result_noti_recipients` if it
+is set in `config.sh` file.
