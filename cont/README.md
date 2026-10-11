@@ -8,14 +8,19 @@ Setup: Machines
 
 You need to prepare two machines: 'triger' and 'runner'.  'Trigger' machine
 monitors updates to the test target kernel trees and request 'runner' machine
-to fetch the source code, build, reboot, and run DAMON tests in it.
+to fetch the source code, build, reboot, and run DAMON tests in it.  Hence,
+'trigger' machine needs no much h/w resources.  Meanwhile, 'runner' machine
+should have enough resource to build the kernel.  Both should have disk space
+that is large enough to keep having the full git history of Linux and built
+kernels.
 
 'Trigger' machine should be able to `ssh` into 'runner' machine without any
 password prompt.  Setting `~/.ssh/authorized_keys` in the 'runner' machine
 would be a way for this.  'Trigger' machine should also be able to run `sudo`
 without prompts.  Setting `sudoer` file via `visudo` would be a way to do that.
 
-'Runner' machine should also have `rsync` and `drgn` instlled.
+Both machines should have `git` and `rsync` installed.  'Runner' machine should
+also have `drgn` instlled.
 
 Setup: CI config
 ================
