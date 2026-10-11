@@ -69,7 +69,7 @@ then
 fi
 
 # disable thp always, as some tests fail by the lack of tlb flushes
-echo madivse | tee /sys/kernel/mm/transparent_hugepage/enabled
+echo madvise | tee /sys/kernel/mm/transparent_hugepage/enabled
 
 # run
 (
