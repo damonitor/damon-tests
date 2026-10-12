@@ -1,23 +1,26 @@
 #!/bin/bash
-# Sets up the local test machine.  Specifically, ensure specified version of
-# damon-tests, damo, lazybox, and linux are checked out under work directory
-# and the linux is built and installed.
+# Sets up the local test machine.  Fetch and checkout specified versions of
+# masim, lazybox, damon-tests, damo, linux under work directory.  Also
+# build/install the linux and perf.
 
 set -e
 
-if [ $# -ne 6 ]
+if [ $# -ne 8 ]
 then
-	echo "Usage: $0 <workdir> <damon-tests commit> <damo commit> \\"
+	echo "Usage: $0 <workdir> <masim commit> <lazybox commit> \\"
+	echo "		<damon-tests commit> <damo commit> \\"
 	echo "		<linux commit> <linux remote name> <linux remote url>"
 	exit 1
 fi
 
 work_dir=$1
-damon_tests_commit=$2
-damo_commit=$3
-linux_commit=$4
-linux_remote_name=$5
-linux_remote_url=$6
+masim_commit=$2
+lazybox_commit=$3
+damon_tests_commit=$4
+damo_commit=$5
+linux_commit=$6
+linux_remote_name=$7
+linux_remote_url=$8
 
 sudo apt install -y git build-essential
 
@@ -74,13 +77,13 @@ fi
 echo "setup masim"
 masim_path=$work_dir/masim
 masim_gh_repo=https://github.com/sjp38/masim
-checkout_git "$masim_path" "origin" "$masim_gh_repo" "origin/master"
+checkout_git "$masim_path" "origin" "$masim_gh_repo" "$masim_commit"
 make -C "$masim_path"
 
 echo "setup lazybox"
 lazybox_path=$work_dir/lazybox
 lazybox_gh_repo=https://github.com/sjp38/lazybox
-checkout_git "$lazybox_path" "origin" "$lazybox_gh_repo" "origin/master"
+checkout_git "$lazybox_path" "origin" "$lazybox_gh_repo" "$lazybox_commit"
 
 echo "setup damon-tests"
 damon_tests_path=$work_dir/damon-tests
