@@ -14,6 +14,15 @@ should have enough resource to build the kernel.  Both should have disk space
 that is large enough to keep having the full git history of Linux and built
 kernels.
 
+One of easiest and tested setup is using virtual machines.  For example, below
+setup is tested.
+[lazybox/vmm](https://github.com/sjp38/lazybox/tree/master/vmm) is used for the
+virtual machines setup.
+
+- Host: 16 cores, 27 GiB memory, 500 GiB disk
+- Trigger: 2 cores, 8 GiB memory, 30 GiB disk
+- Runner: 14 cores, 8 GiB memory, 40 GiB disk
+
 'Trigger' machine should be able to `ssh` into 'runner' machine without any
 password prompt.  Setting `~/.ssh/authorized_keys` in the 'runner' machine
 would be a way for this.  'Trigger' machine should also be able to run `sudo`
