@@ -59,3 +59,12 @@ the updated kernel on the 'runner' machines, reboot it, and run the
 `damon-tests/corr` tests on it.  Test results are available under `logs`
 directory.  Summarized results will be sent to `result_noti_recipients` if it
 is set in `config.sh` file.
+
+Manual Test Run
+===============
+
+For debugging and developments, users may need to trigger the tests for
+specific trees, even if the tree is not updated.  In the case, remove
+`.hci_tasks` file, update `_run.sh` to track only the trees to run additional
+test for, and run `run_uncond_single_run.sh`.  Once the manual test is done and
+normal CI need to run again, restore `_run.sh` and execute `run.sh` again.
