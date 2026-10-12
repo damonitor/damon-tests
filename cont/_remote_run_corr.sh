@@ -17,7 +17,9 @@ log_file=$4
 work_dir=$5
 
 timeout_interval=3600
-for i in {1..5};
+# damon-tests/corr is bit flaky.  Retry up to 5 times.
+retry=5
+for ((i = 0 ; i < $retry ; i++))
 do
 	ssh "$test_user@$test_machine" -p "$ssh_port" \
 		-o ServerAliveInterval=60 \ nohup \
