@@ -6,7 +6,7 @@ def main():
     logs_dir = 'logs'
     if not os.path.isdir(logs_dir):
         print('%s not found' % logs_dir)
-    # test date, kernel tree, pass/fail
+    # test date, kernel tree, kernel version, pass/fail
     results = []
     for filename in os.listdir(logs_dir):
         test_day_dir = os.path.join(logs_dir, filename)
@@ -26,13 +26,19 @@ def main():
                     log_file = os.path.join(test_date_dir, log)
                     with open(log_file, 'r') as f:
                         lines = f.read().strip().split('\n')
+                        # first line format is
+                        #   Run damon-tests/corr on <version> kernel
+                        if not lines[0].startswith('Run damon-tests/corr on '):
+                            continue
+                        kernel_version = lines[0].split()[-2]
                         result = 'FAIL'
                         if lines[-1] == '_remote_run_corr.sh SUCCESS':
                             result = 'PASS'
-                        results.append([test_date, kernel_tree, result])
+                        results.append([test_date, kernel_tree, kernel_version, result])
     results.sort(key=lambda x: x[0])
-    for test_date, kernel_tree, result in results:
-        print(result, test_date, kernel_tree)
+    for test_date, kernel_tree, kernel_version, result in results:
+        print('%s %s %s (%s)' %
+              (result, test_date, kernel_tree, kernel_version))
 
 if __name__ == '__main__':
     main()
